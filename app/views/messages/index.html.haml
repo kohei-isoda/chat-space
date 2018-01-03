@@ -6,51 +6,33 @@
     .header
       .left-header
         .left-header__title
-          グループ名
+          = @group.name
         %ul.left-header__members
           Member：
-          %li.member
-            メンバー名
-          %li.member
-            メンバー名
-          %li.member
-            メンバー名
+          - @group.users.each do |user|
+            %li.member
+              = user.name
       .right-header
-        .right-header__button
-          Edit
+        = link_to edit_group_path(@group.id) do
+          .right-header__button Edit
     .messages
       .message
-        .upper-message
-          .upper-message__user-name
-            メンバー
-          .upper-message__date
-            2017/04/04
-        .lower-meesage
-          .lower-message__content
-            メッセージ
-      .message
-        .upper-message
-          .upper-message__user-name
-            メンバー
-          .upper-message__date
-            2017/04/04
-        .lower-meesage
-          .lower-message__content
-            メッセージ
-      .message
-        .upper-message
-          .upper-message__user-name
-            メンバー
-          .upper-message__date
-            2017/04/04
-        .lower-meesage
-          .lower-message__content
-            メッセージ
+        - @messages.each do |message|
+          .upper-message
+            .upper-message__user-name
+              = message.user.name
+            .upper-message__date
+              = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+          .lower-message
+            .lower-message__content
+              = message.content
+          = image_tag message.image_url(:thumb) if message.image?
+
     .form
-      %form
-        %input.form__message
+      = form_for [@group, @message] do |f|
+        = f.text_field :content, placeholder: "メッセージを入力してください", class: "form__message js-content textbox", id: "message_content"
         .form__mask
           %label.form__mask__image
-            = fa_icon 'picture-o', class: 'icon'
-            %input.hidden{type: 'file'}
-        %input.form__submit{type: 'submit', value: 'Send'}
+            %i.fa.fa-picture-o.icon
+            = f.file_field :image, class: "hidden js-file", id: "message_image"
+        = f.submit :Send, class: "form__submit"
