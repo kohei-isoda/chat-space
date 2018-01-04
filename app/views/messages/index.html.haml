@@ -27,7 +27,7 @@
           .lower-message
             .lower-message__content
               = message.content
-          = image_tag message.image_url(:thumb) if message.image?
+          = image_tag message.image_url if message.image?
 
 
     .form
