@@ -119,6 +119,7 @@ $(document).on('turbolinks:load', function() {
         messageId: { id: viewed_message_id }
       },
     })
+
     .always(function(data){
       console.log(data.messages);
       if (data.messages.length !== 0) {
@@ -130,10 +131,11 @@ $(document).on('turbolinks:load', function() {
         console.log("success");
       };
     });
+      $(function(){
+    setInterval(update, 5 * 1000);
+  });
   };
 
-  $(function(){
-    setInterval(update, 10 * 1000);
-  });
+
 
 });
