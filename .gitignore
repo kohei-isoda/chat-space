@@ -18,3 +18,5 @@
 
 # Ignore user posted image
 public/
+
+config/secrets.yml
