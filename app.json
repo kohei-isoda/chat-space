@@ -11,6 +11,7 @@
   },
   "name": "chat-space",
   "scripts": {
+    "postdeploy": "sudo touch /var/lib/mysql/mysql.sock",
     "postdeploy": "bundle exec rake db:migrate"
   },
   "stack": "heroku-18"
