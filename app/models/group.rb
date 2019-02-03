@@ -9,3 +9,4 @@ class Group < ApplicationRecord
     messages.last.try(:content) || "まだメッセージはありません。"
   end
 end
+
